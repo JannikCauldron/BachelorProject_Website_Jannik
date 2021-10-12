@@ -48,8 +48,6 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-12 col-sm-12">
-                                    <!--class="collapse"-->
-                                    <!--v-show="itemCollapsed[mealIndex]"-->
                                     <div v-bind:id="'itemIngredient_' + mealIndex"
                                          :class="itemCollapsed[mealIndex] ? 'collapse show' : 'collapse'">
                                         <form action="#" class="form">
@@ -145,7 +143,6 @@
                     <hr class="dividerLineDotted">
                     <div class="row">
                         <div class="col-4 col-sm-3 align-self-center">
-                            <!--Click auf Zutatenauswahl Button erneuert nicht die view-->
                             <button class="btn btn-outline-info btn-sm"
                                     type="button"
                                     v-bind:data-target="'#itemIngredient_' + mealIndex"
@@ -380,26 +377,7 @@
 </template>
 
 <script>
-/*
-* Methode aufrufen via this.methode()
-* Meine Props aufrufen via this.orderData
-* Props nur initial und data um Daten zu veraendern.
-*
-* Vue Component erstellen mit den Order Informationen.
-* Datenbanken Informationen als JSON anstelle wie Variable Message abspeichern.
-* Man kann die Datenbank Infos als JSON in einem props Objekt speichern.
-* Mit Hilfe von Properties. Nurnoch shopping-cart tag uebrig bleibt.
-*
-* Bestellstatus mittels Axios und Vue bauen.
-* Per Axios die Daten zur Datenbank senden.
-*
-*
-* True/false Variable in vue fuer den collapse zustand
-* Um das collapsible zu setzen.
-* :class="isCollapsed[index] ? 'collapsed' : ''
-* Bei Button Click Funktion aufrufen, die collapse zustand aendert
-*
-* */
+
 
 export default {
     name: 'shoppingCart',
@@ -505,11 +483,9 @@ export default {
             }
             console.log("Eingetragene initiale Stati: ", this.orderStatus);
             this.$forceUpdate();
-            //this.alreadyOrdered = (this.orderStatus !== 0);
         });
 
         //order button enable/disable
-        //this.alreadyOrdered = (this.orderStatus !== 0);
         //ingredientCollapse initialize
         for (let i = 0; i < this.order[0].length; i++) {
             this.itemCollapsed.push(false);
@@ -522,7 +498,6 @@ export default {
 
         console.log("Order Id: ", this.order[3][0].id);
         this.getDeliveryStatus(this.order[3][0].user_id);
-        //this.getDeliveryStatus(this.order[2][0].id);
     },
     computed: {
         completePrice: function () {
@@ -554,7 +529,6 @@ export default {
             price = price.toFixed(2);
             console.log("Berechne ItemPrice: " + price);
             this.itemPrices[itemId] = price;
-            //Vue.set(this.itemPrices, itemId, price);
             console.log("Aktuelle ItemPrices: ", this.itemPrices);
         },
         addMeal: function (itemId) {
@@ -652,7 +626,6 @@ export default {
                         }
                         this.$forceUpdate();
                     })
-                //console.log("Aktueller Status: ", this.orderStatus);
                 this.getDeliveryStatus(userId);
             }, 5000);
         },
